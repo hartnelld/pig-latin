@@ -1,38 +1,27 @@
-var triangle = function(a,b,c){
-    if ((a + b +c) !== 180) {
-        return "unknown";
-    } else if ((a === b) && (b === c)) {
-        return "equilateral";
-    } else if ((a === c) && (a !== b) && (c !== b)) {
-        return "isoceles";
-    } else if ((a !== b) && (b !== c)) {
-        return "scalene";
-    } else {
-        return "unknown";
-    }
+var isVowel = function(input) {
+
+  return input.concat("ay");
+};
+
+var isConsonant = function(input) {
+  var firstCharacter = input.slice(0,1);
+  return input.slice(1,input.length).concat(firstCharacter).concat("ay");
 };
 
 $(document).ready(function() {
-  $("form#triangle-input").submit(function(event) {
-    var a = parseInt($("input#a").val());
-    var b = parseInt($("input#b").val());
-    var c = parseInt($("input#c").val());
+  $("form#english-input").submit(function(event) {
+    var input = $("#input").val();
+    var firstCharacter = input.slice(0,1);
 
-    var result = triangle(a,b,c);
-
-    if (result === "equilateral") {
-      $(".result").text("This is an equilateral triangle.");
-    } else if (result === "isoceles") {
-      $(".result").text("This is an isoceles triangle.");
-    } else if (result === "scalene") {
-      $(".result").text("This is a scalene triangle.");
-    } else if (result === "unknown") {
-      $(".result").text("This is not a triangle.");
-    } else {
-      $(".result").text("");
+    if (firstCharacter.toLowerCase() === "a" || "e" || "i" || "o" || "u") {
+      $(".translation").text(isVowel(input));
+      $("#result").show();
     }
 
-    $("#result").show();
+    if (firstCharacter.toLowerCase() === "b" || "c" || "d" || "f" || "g" || "h" || "j" || "k" || "l" || "m" || "n" || "p" || "q" || "r" || "s" || "t" || "v" || "w" || "x" || "y" || "z") {
+      $(".translation").text(isConsonant(input));
+      $("#result").show();
+    }
     event.preventDefault();
   });
 });
