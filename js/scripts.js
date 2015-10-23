@@ -5,8 +5,21 @@ var isVowel = function(input) {
 var isConsonant = function(input) {
   var firstChars = input.slice(0,1);
   var length = input.length;
+  var i = 0;
+  var word = "";
 
-  return input.slice(1,length).concat(firstChars).concat("ay");
+  while (i < length) {
+    if (!input[i].toLowerCase().match(/a|e|i|o|u/)) {
+      word = word.concat(input[i])
+      console.log(word);
+    } else {
+      break;
+    };
+
+    i++;
+  }
+
+  return input.slice(i,length).concat(word).concat("ay");
 };
 
 $(document).ready(function() {
